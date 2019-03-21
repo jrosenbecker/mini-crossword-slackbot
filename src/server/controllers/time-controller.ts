@@ -1,7 +1,12 @@
 import { Request, Response, Router } from "express";
 import { DatesService } from '../services/dates-service';
-import { InputParseService } from '../services/input-parse-service';
+import { InputParseService } from '../services/add-input-parse-service';
 import { CrosswordEntryService } from '../services/crossword-entry-service';
+import { addTime } from "./add-time";
+import { topTimes } from './top-times';
+import { CommandParseService } from "../services/command-parse-service";
+import { CommandType } from "../models/command-type-enum";
+import { unknownCommand } from "./unknownCommand";
 
 class TimeController {
   public router: Router;
@@ -12,47 +17,20 @@ class TimeController {
   }
 
   private registerRoutes(): void {
-    this.router.post('/add', (req: Request, res: Response) => {
-      console.log('Endpoint hit');
-      console.log(JSON.stringify(req.body));
-      const channelId = req.body.channel_id;
-      if (!channelId) {
-        res.status(400).send(`'channel_id' is a required parameter`)
-      }
-      const parsedResult = InputParseService.tryParse(req.body.text);
-      console.log(`Parsed input: ${parsedResult}`);
-      if (parsedResult && parsedResult !== null) {
-        const completedTime = parsedResult as string;
-        console.log('Attempting save');
-        CrosswordEntryService.save({
-          groupId: channelId,
-          date: DatesService.getCurrentDateString(),
-          completionTime: completedTime
-        }).then(() => {
-          res.status(200).send(`Successfully added completion time of ${completedTime}!`);
-        }).catch((err) => {
-          console.error(err);
-          console.log('Record save issue');
-          res.status(500).send('Something went wrong saving the record');
-        });
+    this.router.post('/command', (req: Request, res: Response) => {
+      const commandResult = CommandParseService.parseCommand(req.body.text);
+      const commandType = commandResult.commandType;
 
-      } else {
-        res.status(400).send('Invalid Input');
+      switch (commandType) {
+        case CommandType.ADD:
+          return addTime(req, res);
+        case CommandType.TOP:
+          return topTimes(req, res);
+        case CommandType.INVALID:
+        default:
+          return unknownCommand(req, res);
       }
     });
-
-
-    this.router.post('/top', (req: Request, res: Response) => {
-      const channelId = req.body.channel_id;
-      if (!channelId) {
-        res.status(400).send(`'channel_id' is a required parameter`)
-      }
-
-      CrosswordEntryService.getTopTimes(10, channelId).then((result) => {
-
-        res.status(200).send(result);
-      })
-    })
   }
 }
 

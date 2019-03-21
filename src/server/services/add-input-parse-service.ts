@@ -2,7 +2,7 @@ import { CompletedTime } from "../models/completed-time";
 import * as leftPad from 'left-pad';
 
 
-class InputParseService {
+class AddInputParseService {
   public tryParse(input: string): string | null {
     if (!input) {
       return null;
@@ -11,7 +11,7 @@ class InputParseService {
     input = input.trim();
     console.log(input);
     try {
-      const regexFormat = /^([0-5]?\d):?([0-5]?\d)$/;
+      const regexFormat = /([0-5]?\d):?([0-5]?\d)/;
       const regexMatch = input.match(regexFormat);
 
 
@@ -40,6 +40,6 @@ class InputParseService {
   }
 }
 
-const service = new InputParseService();
+const service = new AddInputParseService();
 
 export { service as InputParseService };

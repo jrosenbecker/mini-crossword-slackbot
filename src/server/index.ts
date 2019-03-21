@@ -30,7 +30,7 @@ class AppServer {
   }
 
   private registerRoutes(): void {
-    this.express.use('/time', timeController);
+    this.express.use('/', timeController);
   }
 
 }

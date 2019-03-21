@@ -103,7 +103,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/crossword-timer-slackbot-api/prod/1553196065940-2019-03-21T19:21:05.940Z/crossword-timer-slackbot-api.zip"
+          "S3Key": "serverless/crossword-timer-slackbot-api/prod/1553198523445-2019-03-21T20:02:03.445Z/crossword-timer-slackbot-api.zip"
         },
         "FunctionName": "crossword-timer-slackbot-api-prod-api",
         "Handler": "handler.handler",
@@ -129,14 +129,14 @@
         "IamRoleLambdaExecution"
       ]
     },
-    "ApiLambdaVersionqFTm76nDSCADJdGEMul7H1zHlLHZTi6bgH8er8da4A": {
+    "ApiLambdaVersionkmlKO5IP6rLDJzE12kMUV4zduKsYUoYmgWTrMlsqo": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "ApiLambdaFunction"
         },
-        "CodeSha256": "kdT+niwe7o4r3KguSDt6VtSVLPqK8iU/N5fIWRqQU8c="
+        "CodeSha256": "F2l+EmjrP2GVH61eNoQWN2ZZVFfcvvMusHhW/JeMJko="
       }
     },
     "ApiGatewayRestApi": {
@@ -255,7 +255,7 @@
         "MethodResponses": []
       }
     },
-    "ApiGatewayDeployment1553196065957": {
+    "ApiGatewayDeployment1553198523462": {
       "Type": "AWS::ApiGateway::Deployment",
       "Properties": {
         "RestApiId": {
@@ -325,7 +325,7 @@
     "ApiLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "ApiLambdaVersionqFTm76nDSCADJdGEMul7H1zHlLHZTi6bgH8er8da4A"
+        "Ref": "ApiLambdaVersionkmlKO5IP6rLDJzE12kMUV4zduKsYUoYmgWTrMlsqo"
       }
     },
     "ServiceEndpoint": {
