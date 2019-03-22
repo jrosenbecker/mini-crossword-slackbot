@@ -1,9 +1,9 @@
 import { Response } from 'express';
 import { Request } from 'express';
-import { AddInputParseService } from '../services/add-input-parse-service';
-import { CrosswordEntryService } from '../services/crossword-entry-service';
-import { DatesService } from '../services/dates-service';
-import { CommandParseResult } from '../models/command-parse-result';
+import { AddInputParseService } from '../../../services/add-input-parse-service';
+import { CrosswordEntryService } from '../../../services/crossword-entry-service';
+import { DatesService } from '../../../services/dates-service';
+import { CommandParseResult } from '../../../models/command-parse-result';
 
 export function addTime(req: Request, res: Response, commandResult: CommandParseResult) {
   console.log('Endpoint hit');

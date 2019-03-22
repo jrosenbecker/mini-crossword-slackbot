@@ -19,6 +19,7 @@
   "typings": "lib/index.d.ts",
   "scripts": {
     "start": "serverless offline",
+    "deploy": "sls deploy -s prod",
     "debug": "node --inspect ./node_modules/serverless/bin/serverless offline",
     "clean": "rimraf lib && rimraf coverage",
     "format": "prettier --write \"{src,__tests__}/**/*.ts\" --single-quote --trailing-comma es5",

@@ -2,7 +2,7 @@ import { json, urlencoded } from 'body-parser';
 import * as cors from 'cors';
 import * as dynamoose from 'dynamoose';
 import * as express from 'express';
-import timeController from './controllers/time-controller';
+import commandController from './controllers/command/command-controller';
 
 
 class AppServer {
@@ -30,7 +30,7 @@ class AppServer {
   }
 
   private registerRoutes(): void {
-    this.express.use('/', timeController);
+    this.express.use('/', commandController);
   }
 
 }

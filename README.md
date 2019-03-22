@@ -13,4 +13,4 @@ DYNAMO_ACCESS_KEY_ID: '<access-key>'
 DYNAMO_SECRET_ACCESS_KEY: '<secret-key>'
 DYNAMO_REGION: 'us-east-1'
 ```
-5. Deploy using `sls deploy -s prod`. You should then be able to set up the slack bot using the URL it gives you back. The slackbot should be posting to the `/command` endpoint.
+5. Deploy using `npm run deploy`. You should then be able to set up the slack bot using the URL it gives you back. The slackbot should be posting to the `/command` endpoint.

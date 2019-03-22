@@ -1,8 +1,9 @@
 import { Request, Response } from "express";
-import { TopInputParseService } from '../services/top-input-parse-service';
-import { CrosswordEntryService } from "../services/crossword-entry-service";
-import { CommandParseResult } from "../models/command-parse-result";
-import { FormattedSlackResponse } from "../models/formatted-slack-response";
+import { TopInputParseService } from '../../../services/top-input-parse-service';
+import { CrosswordEntryService } from "../../../services/crossword-entry-service";
+import { CommandParseResult } from "../../../models/command-parse-result";
+import { FormattedSlackResponse } from "../../../models/formatted-slack-response";
+import { DatesService } from "../../../services/dates-service";
 
 export function topTimes(req: Request, res: Response, commandResult: CommandParseResult) {
   const channelId = req.body.channel_id;
@@ -20,14 +21,14 @@ export function topTimes(req: Request, res: Response, commandResult: CommandPars
     if (result.length === 1) {
       const slackResponse: FormattedSlackResponse = {
         response_type: 'in_channel',
-        text: `Your top result is ${result[0].completionTime}`
+        text: `Your top result is ${result[0].completionTime} on ${DatesService.getCentralTimeDate(result[0].date)}`
       }
       return res.status(200).send(slackResponse);
     }
 
     let responseText = `Your top ${result.length} times:`;
     result.forEach((entry, index) => {
-      responseText += `\n${index + 1}) ${entry.completionTime}`;
+      responseText += `\n${index + 1}) ${entry.completionTime} on ${DatesService.getCentralTimeDate(result[index].date)}`;
     })
 
     const slackResponse: FormattedSlackResponse = {

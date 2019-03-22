@@ -1,14 +1,14 @@
 import { Request, Response, Router } from "express";
-import { DatesService } from '../services/dates-service';
-import { AddInputParseService } from '../services/add-input-parse-service';
-import { CrosswordEntryService } from '../services/crossword-entry-service';
-import { addTime } from "./add-time";
-import { topTimes } from './top-times';
-import { CommandParseService } from "../services/command-parse-service";
-import { CommandType } from "../models/command-type-enum";
-import { unknownCommand } from "./unknownCommand";
+import { DatesService } from '../../services/dates-service';
+import { AddInputParseService } from '../../services/add-input-parse-service';
+import { CrosswordEntryService } from '../../services/crossword-entry-service';
+import { addTime } from "./functions/add-time";
+import { topTimes } from './functions/top-times';
+import { CommandParseService } from "../../services/command-parse-service";
+import { CommandType } from "../../models/command-type-enum";
+import { unknownCommand } from "./functions/unknown-command";
 
-class TimeController {
+class CommandController {
   public router: Router;
 
   constructor() {
@@ -34,4 +34,4 @@ class TimeController {
   }
 }
 
-export default new TimeController().router;
+export default new CommandController().router;
