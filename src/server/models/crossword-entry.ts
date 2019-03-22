@@ -1,4 +1,4 @@
-import * as dynamoose from 'dynamoose';
+import { dynamoose } from '../services/dynamoose-wrapper-service';
 
 export interface CrosswordEntry {
   groupId: string;

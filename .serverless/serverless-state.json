@@ -117,7 +117,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/crossword-timer-slackbot-api/prod/1553200755570-2019-03-21T20:39:15.570Z/crossword-timer-slackbot-api.zip"
+                "S3Key": "serverless/crossword-timer-slackbot-api/prod/1553266575066-2019-03-22T14:56:15.066Z/crossword-timer-slackbot-api.zip"
               },
               "FunctionName": "crossword-timer-slackbot-api-prod-api",
               "Handler": "handler.handler",
@@ -143,14 +143,14 @@
               "IamRoleLambdaExecution"
             ]
           },
-          "ApiLambdaVersionsXKi4rU9Od6OqJv5iDkFPHZBjwW8rIG8JHW5BJMXE": {
+          "ApiLambdaVersionffhJL9RC54WVIEJTpTI8wT62eNXbMWgZiDxoO5KMvdE": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "ApiLambdaFunction"
               },
-              "CodeSha256": "JbDxZuP5I4uQWeBL/+kf2+OY+GH/AnTqSt7ectFH7K8="
+              "CodeSha256": "Zk10qthzsQKahew+Nq8upFv45XFjOEoNQtjx0eBttFY="
             }
           },
           "ApiGatewayRestApi": {
@@ -269,7 +269,7 @@
               "MethodResponses": []
             }
           },
-          "ApiGatewayDeployment1553200755587": {
+          "ApiGatewayDeployment1553266575083": {
             "Type": "AWS::ApiGateway::Deployment",
             "Properties": {
               "RestApiId": {
@@ -339,7 +339,7 @@
           "ApiLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "ApiLambdaVersionsXKi4rU9Od6OqJv5iDkFPHZBjwW8rIG8JHW5BJMXE"
+              "Ref": "ApiLambdaVersionffhJL9RC54WVIEJTpTI8wT62eNXbMWgZiDxoO5KMvdE"
             }
           },
           "ServiceEndpoint": {
@@ -446,7 +446,7 @@
     "layers": {}
   },
   "package": {
-    "artifactDirectoryName": "serverless/crossword-timer-slackbot-api/prod/1553200755570-2019-03-21T20:39:15.570Z",
+    "artifactDirectoryName": "serverless/crossword-timer-slackbot-api/prod/1553266575066-2019-03-22T14:56:15.066Z",
     "artifact": ""
   }
 }
