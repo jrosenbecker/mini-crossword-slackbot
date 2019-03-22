@@ -9,3 +9,4 @@ lib_test
 .idea/
 *.iml
 serverless.variables.yml
+.serverless
