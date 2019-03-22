@@ -1,17 +1,18 @@
 import { Response } from 'express';
 import { Request } from 'express';
-import { InputParseService } from '../services/add-input-parse-service';
+import { AddInputParseService } from '../services/add-input-parse-service';
 import { CrosswordEntryService } from '../services/crossword-entry-service';
 import { DatesService } from '../services/dates-service';
+import { CommandParseResult } from '../models/command-parse-result';
 
-export function addTime(req: Request, res: Response) {
+export function addTime(req: Request, res: Response, commandResult: CommandParseResult) {
   console.log('Endpoint hit');
   console.log(JSON.stringify(req.body));
   const channelId = req.body.channel_id;
   if (!channelId) {
     return res.status(400).send(`'channel_id' is a required parameter`)
   }
-  const parsedResult = InputParseService.tryParse(req.body.text);
+  const parsedResult = AddInputParseService.tryParse(req.body.text);
   console.log(`Parsed input: ${parsedResult}`);
   if (parsedResult && parsedResult !== null) {
     const completedTime = parsedResult as string;

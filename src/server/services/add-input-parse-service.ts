@@ -42,4 +42,4 @@ class AddInputParseService {
 
 const service = new AddInputParseService();
 
-export { service as InputParseService };
+export { service as AddInputParseService };

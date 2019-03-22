@@ -1,6 +1,6 @@
 import { Request, Response, Router } from "express";
 import { DatesService } from '../services/dates-service';
-import { InputParseService } from '../services/add-input-parse-service';
+import { AddInputParseService } from '../services/add-input-parse-service';
 import { CrosswordEntryService } from '../services/crossword-entry-service';
 import { addTime } from "./add-time";
 import { topTimes } from './top-times';
@@ -23,9 +23,9 @@ class TimeController {
 
       switch (commandType) {
         case CommandType.ADD:
-          return addTime(req, res);
+          return addTime(req, res, commandResult);
         case CommandType.TOP:
-          return topTimes(req, res);
+          return topTimes(req, res, commandResult);
         case CommandType.INVALID:
         default:
           return unknownCommand(req, res);
