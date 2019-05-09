@@ -12,16 +12,12 @@ class AddInputParseService {
       input = input.split(' ')[1];
     }
     input = input.trim();
-    console.log(input);
     try {
       let minutes = 59;
       let seconds = 59;
       if (input.startsWith(':')) {
-        console.log(input);
         minutes = 0;
         seconds = +input.substring(1);
-        console.log(`minutes: ${minutes}'`);
-        console.log(`seconds: ${seconds}`);
       } else {
         const regexFormat = /([0-5]?\d):?([0-5]?\d)/;
         const regexMatch = input.match(regexFormat);
