@@ -8,33 +8,36 @@ class AddInputParseService {
       return null;
     }
 
+    if (input.startsWith('add ')) {
+      input = input.split(' ')[1];
+    }
     input = input.trim();
     console.log(input);
     try {
-      const regexFormat = /([0-5]?\d):?([0-5]?\d)/;
-      const regexMatch = input.match(regexFormat);
-
-
-    console.log('regexMatch:');
-    console.log(JSON.stringify(regexMatch));
-
-    if (regexMatch && regexMatch.length === 3) {
-      const minutes = regexMatch[1];
-      const seconds = regexMatch[2];
+      let minutes = 59;
+      let seconds = 59;
+      if (input.startsWith(':')) {
+        console.log(input);
+        minutes = 0;
+        seconds = +input.substring(1);
+        console.log(`minutes: ${minutes}'`);
+        console.log(`seconds: ${seconds}`);
+      } else {
+        const regexFormat = /([0-5]?\d):?([0-5]?\d)/;
+        const regexMatch = input.match(regexFormat);
+        if (regexMatch && regexMatch.length === 3) {
+          minutes = +regexMatch[1];
+          seconds = +regexMatch[2];
+        }
+      }
 
       const paddedMinutes = leftPad(minutes, 2, '0');
       const paddedSeconds = leftPad(seconds, 2, '0');
 
       return `${paddedMinutes}:${paddedSeconds}`;
+    } catch (error) {
+      console.log(JSON.stringify(error));
     }
-
-    console.log(`Regex Groups`);
-    if (regexMatch) {
-      console.log(JSON.stringify(regexMatch.groups));
-    }
-  } catch (error) {
-    console.log(JSON.stringify(error));
-  }
 
     return null;
   }
