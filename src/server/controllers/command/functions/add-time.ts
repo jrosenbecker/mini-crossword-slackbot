@@ -1,4 +1,5 @@
 import { Request, Response } from 'express';
+import { indicator } from 'ordinal';
 
 import { CommandParseResult } from '../../../models/command-parse-result';
 import { AddInputParseService } from '../../../services/add-input-parse-service';
@@ -26,13 +27,14 @@ export function addTime(req: Request, res: Response, commandResult: CommandParse
 
       CrosswordEntryService.getAllTopTimes(channelId).then((topTimes) => {
         const index = topTimes.findIndex(crosswordEntry => crosswordEntry.date === date);
+        const rank = index + 1;
         return res.status(200).send({
           response_type: 'in_channel',
-          text: `Successfully added completion time of ${completedTime}! Today's Rank: ${index + 1} / ${topTimes.length}`
+          text: `Successfully added completion time of *${completedTime}*! _This is your *${rank}${indicator(rank)}* best time out of ${topTimes.length}_`
         });
       }).catch((err) => {
         console.error(err);
-        return res.status(200).send('Uh oh, something went wrong trying to save!');
+        return res.status(200).send(`Successfully added completion time of *${completedTime}*! I messed up finding your rank though.`);
       })
 
 
