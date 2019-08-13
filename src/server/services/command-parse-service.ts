@@ -1,5 +1,5 @@
-import { CommandParseResult } from "../models/command-parse-result";
-import { CommandType } from "../models/command-type-enum";
+import { CommandParseResult } from '../models/command-parse-result';
+import { CommandType } from '../models/command-type-enum';
 
 const invalidResult: CommandParseResult = { arguments: '', commandType: CommandType.INVALID };
 
@@ -19,12 +19,15 @@ class CommandParseService {
       args = rawInputText.substring(rawInputText.indexOf(' '));
     }
 
-
     switch (inputCommand) {
       case 'add':
         return { arguments: args, commandType: CommandType.ADD };
       case 'top':
         return { arguments: args, commandType: CommandType.TOP };
+      case 'join':
+        return { arguments: args, commandType: CommandType.JOIN };
+      case 'leave':
+        return { arguments: args, commandType: CommandType.LEAVE };
       default:
         return invalidResult;
     }

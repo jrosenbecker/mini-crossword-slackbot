@@ -1,12 +1,10 @@
-import { Request, Response, Router } from "express";
-import { DatesService } from '../../services/dates-service';
-import { AddInputParseService } from '../../services/add-input-parse-service';
-import { CrosswordEntryService } from '../../services/crossword-entry-service';
-import { addTime } from "./functions/add-time";
+import { Request, Response, Router } from 'express';
+
+import { CommandType } from '../../models/command-type-enum';
+import { CommandParseService } from '../../services/command-parse-service';
+import { addTime } from './functions/add-time';
 import { topTimes } from './functions/top-times';
-import { CommandParseService } from "../../services/command-parse-service";
-import { CommandType } from "../../models/command-type-enum";
-import { unknownCommand } from "./functions/unknown-command";
+import { unknownCommand } from './functions/unknown-command';
 
 class CommandController {
   public router: Router;
@@ -18,6 +16,7 @@ class CommandController {
 
   private registerRoutes(): void {
     this.router.post('/command', (req: Request, res: Response) => {
+      console.log(req.body);
       const commandResult = CommandParseService.parseCommand(req.body.text);
       const commandType = commandResult.commandType;
 

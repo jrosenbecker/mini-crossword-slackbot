@@ -1,8 +1,13 @@
-import { CompletedTime } from "../models/completed-time";
 import * as leftPad from 'left-pad';
 
 
 class AddInputParseService {
+  public isGroup(input: string): boolean {
+    const regexFormat = /.* group.*/
+    const regexMatch = input.match(regexFormat);
+    return !!regexMatch;
+  }
+
   public tryParse(input: string): string | null {
     if (!input) {
       return null;
