@@ -16,7 +16,7 @@ class CrosswordEntryService {
   }
 
   public getAllTopTimes(crossworderId: string): Promise<CrosswordEntry[]> {
-    return CrosswordEntryEntity.query('crossworderId-completionTime-index').eq(crossworderId).ascending().exec()
+    return CrosswordEntryEntity.query('crossworderId').eq(crossworderId).ascending().exec()
       .then(result => {
         return result as CrosswordEntry[];
       });

@@ -1,4 +1,5 @@
 import { Request, Response } from 'express';
+import { indicator } from 'ordinal';
 
 import { CommandParseResult } from '../../../models/command-parse-result';
 import { CrossworderType } from '../../../models/crossworder-type-enum';
@@ -39,18 +40,18 @@ export function addTime(req: Request, res: Response, commandResult: CommandParse
     console.log(saveObject);
     CrosswordEntryService.save(saveObject).then(() => {
 
-      // CrosswordEntryService.getAllTopTimes(channelId).then((topTimes) => {
-      //   const index = topTimes.findIndex(crosswordEntry => crosswordEntry.date === date);
-      //   const rank = index + 1;
-      //   return res.status(200).send({
-      //     response_type: 'in_channel',
-      //     text: `Successfully added completion time of *${completedTime}*! _This is your *${rank}${indicator(rank)}* best time out of ${topTimes.length}_`
-      //   });
-      // }).catch((err) => {
-      //   console.error(err);
-      //   return res.status(200).send(`Successfully added completion time of *${completedTime}*! I messed up finding your rank though.`);
-      // })
-      return res.status(200).send(`Successfully added times to new database!!!`);
+      CrosswordEntryService.getAllTopTimes(crossworderId).then((topTimes) => {
+        const index = topTimes.findIndex(crosswordEntry => crosswordEntry.date === date);
+        const rank = index + 1;
+        return res.status(200).send({
+          response_type: 'in_channel',
+          text: `Successfully added completion time of *${completedTime}*! _This is your *${rank}${indicator(rank)}* best time out of ${topTimes.length}_`
+        });
+      }).catch((err) => {
+        console.error(err);
+        return res.status(200).send(`Successfully added completion time of *${completedTime}*! I messed up finding your rank though.`);
+      })
+      // return res.status(200).send(`Successfully added times to new database!!!`);
 
 
     }).catch((err) => {
