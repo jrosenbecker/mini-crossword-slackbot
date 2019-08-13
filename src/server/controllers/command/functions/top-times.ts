@@ -1,9 +1,11 @@
-import { Request, Response } from "express";
+import { Request, Response } from 'express';
+
+import { CommandParseResult } from '../../../models/command-parse-result';
+import { FormattedSlackResponse } from '../../../models/formatted-slack-response';
+import { AddInputParseService } from '../../../services/add-input-parse-service';
+import { CrosswordEntryService } from '../../../services/crossword-entry-service';
+import { DatesService } from '../../../services/dates-service';
 import { TopInputParseService } from '../../../services/top-input-parse-service';
-import { CrosswordEntryService } from "../../../services/crossword-entry-service";
-import { CommandParseResult } from "../../../models/command-parse-result";
-import { FormattedSlackResponse } from "../../../models/formatted-slack-response";
-import { DatesService } from "../../../services/dates-service";
 
 export function topTimes(req: Request, res: Response, commandResult: CommandParseResult) {
   const channelId = req.body.channel_id;
@@ -13,7 +15,14 @@ export function topTimes(req: Request, res: Response, commandResult: CommandPars
 
   const topCount = TopInputParseService.tryParse(commandResult.arguments);
 
-  CrosswordEntryService.getTopTimes(topCount, channelId).then((result) => {
+  let crossworderId = req.body.user_id;
+  if (AddInputParseService.isGroup(commandResult.arguments)) {
+    crossworderId = req.body.channel_id;
+  }
+
+  console.log(`topCount: ${topCount}`);
+  console.log(`crossworderId: ${crossworderId}`);
+  CrosswordEntryService.getTopTimes(topCount, crossworderId).then((result) => {
     if (result.length === 0) {
       return res.status(200).send(`No results found! Add crosswords results with '/crossword add'`);
     }
@@ -37,5 +46,5 @@ export function topTimes(req: Request, res: Response, commandResult: CommandPars
     }
 
     res.status(200).send(slackResponse);
-  });
+  }).catch(err => console.error(err));
 }

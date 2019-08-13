@@ -8,15 +8,15 @@ class CrosswordEntryService {
     return entity.save();
   }
 
-  public getTopTimes(topCount: number, groupId: string): Promise<CrosswordEntry[]> {
-    return CrosswordEntryEntity.query('groupId').eq(groupId).ascending().limit(topCount).exec()
+  public getTopTimes(topCount: number, crossworderId: string): Promise<CrosswordEntry[]> {
+    return CrosswordEntryEntity.query('crossworderId').eq(crossworderId).ascending().limit(topCount).exec()
       .then(result => {
         return result as CrosswordEntry[];
       });
   }
 
-  public getAllTopTimes(groupId: string): Promise<CrosswordEntry[]> {
-    return CrosswordEntryEntity.query('groupId').eq(groupId).ascending().exec()
+  public getAllTopTimes(crossworderId: string): Promise<CrosswordEntry[]> {
+    return CrosswordEntryEntity.query('crossworderId-completionTime-index').eq(crossworderId).ascending().exec()
       .then(result => {
         return result as CrosswordEntry[];
       });

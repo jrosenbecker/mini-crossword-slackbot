@@ -10,14 +10,19 @@ export interface CrosswordEntry {
 
 const CrosswordEntryEntity = dynamoose.model<CrosswordEntry, CrosswordEntry>('CrosswordEntries2', {
   teamId: String,
-  crossworderId: String,
+  crossworderId: {
+    type: String,
+    index: {
+      global: true,
+      hashKey: 'crossworderId',
+      rangeKey: 'completionTime',
+      name: 'crossworderId-completionTime-index',
+      throughput: 1
+    }
+  },
   crossworderType: String,
   completionTime: String,
   date: String
-}, {
-  update: false,
-  create: false,
-  waitForActive: true
-});
+}, { update: false, create: false });
 
 export { CrosswordEntryEntity };
